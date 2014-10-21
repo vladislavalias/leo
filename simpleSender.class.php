@@ -412,21 +412,19 @@ class simpleSender
   
   protected function createPostHead($url, $strlen, $boundary)
   {
-    if (!$url || !$strlen || null === $boundary) return false;
+    if (!$url) return false;
     
     $this->getLogger()->logIt('create post head', 15);
     $server = $this->getServerFromUrl($url, 2);
     $file = $this->getFileFromUrl($url, $server);
     
     $result = "POST ".$file." HTTP/1.1\r\n";
+    $result .= "User-Agent: Opera/9.80 (X11; Linux i686) Presto/2.12.388 Version/12.16\r\n";
     $result .= "Host: ".$server."\r\n";
     $result .= "Accept: text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/webp, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1\r\n";
     $result .= "Accept-Language: ru-RU,ru;q=0.9,en;q=0.8\r\n";
     $result .= "Referer: http://lingualeo.com/ru/\r\n";
-    $result .= "User-Agent: Opera/9.80 (X11; Linux i686) Presto/2.12.388 Version/12.16\r\n";
-    $result .= "Pragma: no-cache\r\n";
-    $result .= "Cache-Control: no-cache\r\n";
-    $result .= "Connection: close:\r\n";
+    $result .= "Connection: Keep-Alive\r\n";
     $result .= "DNT: 1\r\n";
     if ($boundary)
     {

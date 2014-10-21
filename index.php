@@ -34,8 +34,8 @@ $firstAnswer = $sender->getRaw('lingualeo.com/ru/register', 'post');
 dump($firstAnswer, false);
 $cookies = extractCookies($sender->splitResult($firstAnswer), 'Set-Cookie');
 $sender->setHeaders(['Cookie: '.implode('; ', $cookies) . "\r\n"]);
-$sender->setData($data);
-dump($sender->getRaw('lingualeo.com/ru/register', 'post'));
+//$sender->setData($data);
+dump($sender->getRaw('lingualeo.com/ru/survey/step/1'));
 
 function dump($value, $exit = true)
 {
@@ -57,7 +57,7 @@ function extractCookies($text, $name)
     
     list($headName, $headValue) = explode(': ', $trimed, 2);
     
-    if ($name == $headName)
+    if ($name == $headName && false === strpos($headValue, 'deleted'))
     {
       list($first, ) = explode(';', $headValue, 2);
       $result[] = trim($first);
